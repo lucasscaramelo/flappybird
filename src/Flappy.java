@@ -1,4 +1,4 @@
-import java.util.Set;
+//import java.util.Set;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,7 +42,7 @@ public class Flappy implements Jogo{
 		return 512;
 	}
 	
-	public void tique(Set<String> teclas, double dt) {
+	public void tique(java.util.Set<String> teclas, double dt) {
 		
 		// To Ground
 		ground_offset += dt*gvx;
@@ -56,8 +56,21 @@ public class Flappy implements Jogo{
 		
 		passaro.atualiza(dt);
 		
+		if(passaro.y+24 >= getAltura()-112) {
+			//gameOver
+		}else if(passaro.vy <= 0) {
+			
+		}
+		
 		for(Cano cano: canos) {
 			cano.atualiza(dt);
+			if(passaro.box.intersecao(cano.boxcima) !=0 || passaro.box.intersecao(cano.boxbaixo) !=0) {
+				//gameOver
+			}
+		}
+		
+		if(canos.size()>0 && canos.get(0).x < - 60) {
+			canos.remove(0);
 		}
 	}
 
